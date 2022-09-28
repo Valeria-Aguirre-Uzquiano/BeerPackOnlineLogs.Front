@@ -9,6 +9,8 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
+  // angular.module('MyApp',['ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
+
   ngOnInit(): void {
   }
 

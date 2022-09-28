@@ -1,1 +1,78 @@
-<p>forms-logs works!</p>
+
+<ng-template #contenido let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Titulo Modal</h4>
+    <button
+      class="close"
+      aria-label="close"
+      type="button"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body .modal-xl">
+    <div [hidden]="submitted">
+      <form (ngSubmit)="onSubmit()" class=" .col-xs">
+        <div class="form-group">
+          <label for="name">Fecha</label>
+          <input type="date" class="form-control" id="name" />
+        </div>
+        <div class="form-group .col-xs">
+          <label for="power">Tipo Log</label>
+          <select class="form-control" id="power" required>
+            <option *ngFor="let pow of tipo" [value]="pow">{{ pow }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="power">Tipo Servicio</label>
+          <select class="form-control" id="power" required>
+            <option *ngFor="let pow of servicio" [value]="pow">
+              {{ pow }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Condición de Servicio</label>
+          <input type="text" class="form-control" id="alterEgo" />
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Evento Nro :</label>
+          <input type="text" class="form-control" id="alterEgo" />
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Tipo de Evento</label>
+          <input type="text" class="form-control" id="alterEgo" />
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Condición</label>
+          <input type="text" class="form-control" id="alterEgo" />
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Resultados</label>
+          <input type="text" class="form-control" id="alterEgo" />
+        </div>
+        <div class="form-group">
+          <label for="alterEgo">Responsable</label>
+          <input type="text" class="form-control" id="alterEgo" />
+        </div>
+
+        &nbsp;&nbsp;
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="modal.close()">
+      Ok!
+    </button>
+  </div>
+</ng-template>
+
+
+<button
+  type="button"
+  class="btn btn-warning"
+  (click)="openScroll(contenido)"
+>Nuevo Log
+</button>

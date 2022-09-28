@@ -5,7 +5,7 @@ import { FormsLogsComponent } from './Components/Forms/forms-logs/forms-logs.com
 import { RecordsLogsComponent } from './Components/Records/records-logs/records-logs.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/records', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'forms', component: FormsLogsComponent },
   { path: 'records', component: RecordsLogsComponent },
