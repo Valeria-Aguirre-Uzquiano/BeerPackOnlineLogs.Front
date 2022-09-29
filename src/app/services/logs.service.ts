@@ -19,6 +19,10 @@ export class LogsService {
     return this.http.post<HttpResponse<any>>((this.API_URL + '/fis'),postData,{ 'headers': this.headers });
   }
 
+  getLogsFis(){
+    return this.http.get(this.API_URL + '/fis', {headers: this.headers});
+  }
+
 }
 
 

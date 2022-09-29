@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LogFis } from 'src/app/Models/LogFis';
 import { LogsService } from 'src/app/services/logs.service';
 
 @Component({
@@ -14,9 +15,12 @@ export class RecordsLogsComponent implements OnInit {
 
   ngOnInit(): void {
     //this.setData()
+    this.getLogs();
  
   }
-  total: any[]=[]  
+  total: any[]=[] 
+  response: any = [];
+  LogsFis: any | LogFis = [];
   
 
   setData() {
@@ -89,5 +93,19 @@ export class RecordsLogsComponent implements OnInit {
   showFormControls(form: any) {
     return form && form.controls['name'] && form.controls['name'].value; // Dr. IQ
   }
+
+  getLogs(){
+    this.logService.getLogsFis().subscribe(
+      res => {
+        //console.log(res);
+        this.response = res;
+        //console.log(this.response.content);
+        this.LogsFis = res;
+        console.log(this.LogsFis);
+      },
+      err => console.log(err)
+    );
+  }
+  
 
 }
