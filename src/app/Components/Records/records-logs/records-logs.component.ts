@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { LogsService } from 'src/app/services/logs.service';
+
 @Component({
   selector: 'app-records-logs',
   templateUrl: './records-logs.component.html',
@@ -9,37 +10,38 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 export class RecordsLogsComponent implements OnInit {
   
 
-  constructor(private modal: NgbModal, private http: HttpClient) { }
+  constructor(private modal: NgbModal, private logService: LogsService) { }
 
   ngOnInit(): void {
-    this.setData()
+    //this.setData()
  
   }
-  total: any[]=[]
- 
-  API_URL = 'http://localhost:3000';
-  totalComision?: Number | undefined;
-  headers = new HttpHeaders()
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*');
-    auth_headers = new HttpHeaders()
-    .set('content-type', 'application/json')
-    .set('Access-Control-Allow-Origin', '*')
-    postData={
-      idArea: 1,
-      idServicio: 1,
-      fecha: "2022-09-28T17",
-      condicionServicio: "A",
-      nroEvento: "1",
-      tipoEvento: "A",
-      condicion: "A",
-      resultado: "A",
-      responsable: "A"
-  }
+  total: any[]=[]  
+  
+
   setData() {
 
-    this.http.post<HttpResponse<any>>((this.API_URL + '/fis'),this.postData,{ 'headers': this.auth_headers });
-    console.log("first")
+    const postData = {
+      "idArea": 1,
+      "idServicio": 1,
+      "fecha": "2022-09-09T17",
+      "condicionServicio": "A",
+      "nroEvento": "4",
+      "tipoEvento": "A",
+      "condicion": "A",
+      "resultado": "A",
+      "responsable": "A"
+    }
+
+    console.log(JSON.stringify(postData));
+    
+    this.logService.postLogFis(postData).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => []
+    );
+
   }
   openCentrado(contenido: any) {
     this.modal.open(contenido, { centered: true });
