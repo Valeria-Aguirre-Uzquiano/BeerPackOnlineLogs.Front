@@ -141,8 +141,7 @@
     
 </body>
 
-<!-- Modal Form-->
- <!-- ////////////////////////////////////////////////////////////////////////////-->
+
 <ng-template #contenido let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Titulo Modal</h4>
@@ -156,63 +155,64 @@
       </button>
     </div>
     <div class="modal-body .modal-xl">
-      <div [hidden]="submitted">
-        <form (ngSubmit)="onSubmit()" class=" .col-xs">
+      <div ng-controller="myCtrl">
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" >
           <div class="form-group">
             <label for="name">Fecha</label>
-            <input type="date" class="form-control" id="name" />
+            <input type="date" class="form-control" formControlName="fecha" />
           </div>
           <div class="form-group .col-xs">
             <label for="power">Tipo Log</label>
-            <select class="form-control" id="power" required>
-              <option *ngFor="let pow of tipo" [value]="pow">{{ pow.name }}</option>
+            <select class="form-control" id="tipolog" formControlName="idArea" required>
+              <option *ngFor="let pow of tipo" [value]="pow" [ngValue]="pow.id">{{ pow.name }}</option>
               
             </select>
           </div>
   
           <div class="form-group">
             <label for="power">Tipo Servicio</label>
-            <select class="form-control" id="power" ng-model="servicio2" required>
-              <option *ngFor="let pow of servicio" [value]="pow" >
+            <select class="form-control" id="sertipo" formControlName="idServicio"  required>
+              <option *ngFor="let pow of servicio" [value]="pow"  [ngValue]="pow.id">
                 {{ pow.name }}
               </option>
             </select>
           </div>
           <div class="form-group">
             <label for="alterEgo">Condición de Servicio</label>
-            <input type="text" class="form-control" id="alterEgo" />
+            <input type="text" class="form-control" id="condicions" formControlName="condicionServicio" ngModel />
           </div>
           <div class="form-group">
             <label for="alterEgo">Evento Nro :</label>
-            <input type="text" class="form-control" id="alterEgo" />
+            <input type="text" class="form-control" id="evento" formControlName="nroEvento" />
           </div>
           <div class="form-group">
             <label for="alterEgo">Tipo de Evento</label>
-            <input type="text" class="form-control" id="alterEgo" />
+            <input type="text" class="form-control" id="tipoe" formControlName="tipoEvento" />
           </div>
           <div class="form-group">
             <label for="alterEgo">Condición</label>
-            <input type="text" class="form-control" id="alterEgo" />
+            <input type="text" class="form-control" id="condicion" formControlName="condicion"  />
           </div>
           <div class="form-group">
             <label for="alterEgo">Resultados</label>
-            <input type="text" class="form-control" id="alterEgo" />
+            <input type="text" class="form-control" id="resultados" formControlName="resultado" />
           </div>
           <div class="form-group">
             <label for="alterEgo">Responsable</label>
-            <input type="text" class="form-control" id="alterEgo" />
+            <input type="text" class="form-control" id="responsable" formControlName="responsable" />
           </div>
   
           &nbsp;&nbsp;
+          
+          &nbsp;&nbsp;
+          <button type="submit" class="btn btn-success">
+            OK
+          </button>
+          <button type="button" class="btn btn-danger" (click)="modal.close()">
+            Cerrar!
+          </button>
         </form>
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-success" (click)="modal.close()">
-        Cerrar!
-      </button>
-      <button type="button" class="btn btn-success" (click)="setData()">
-        OK
-      </button>
-    </div>
+ 
   </ng-template>
