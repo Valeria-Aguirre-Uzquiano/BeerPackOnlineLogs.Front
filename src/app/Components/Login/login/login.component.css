@@ -20,3 +20,17 @@
 .mt-top-2{
     margin-top: 10px;
 }
+
+.btn-login{
+    width: 100%;
+    background-color: #0070E0;
+    color: white;
+    border-color: #0070E0;
+    
+}
+
+.btn-login:hover {
+    background-color: white; /* Green */
+    color: #0070E0;
+      
+}

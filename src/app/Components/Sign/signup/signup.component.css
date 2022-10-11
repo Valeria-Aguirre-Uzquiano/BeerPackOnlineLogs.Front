@@ -1,0 +1,13 @@
+.btn-sign{
+    width: 100%;
+    background-color: #0070E0;
+    color: white;
+    border-color: #0070E0;
+    
+}
+
+.btn-sign:hover {
+    background-color: white; /* Green */
+    color: #0070E0;
+      
+}

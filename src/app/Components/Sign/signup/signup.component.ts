@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit {
 
-  /*user: User ={
-    username: '',
-    pass: ''
-  }*/
-
-  public loginForm: FormGroup;
+  public SignupForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder, 
-    //private userservices: UserService, 
+    private userservices: UserService, 
    //private router: Router, 
     //private location: Location
     ) { 
-      this.loginForm = this.formBuilder.group({
+      this.SignupForm = this.formBuilder.group({
+      names:[''],
+      lastnames:[''],
       email:[''],
       pass: ['']
     });
@@ -32,38 +30,33 @@ export class LoginComponent implements OnInit {
   }
 
   getValue(value:string){
-    return this.loginForm.get(value);
+    return this.SignupForm.get(value);
   }
 
-  login(){
-    console.log(this.loginForm.value);
-    //console.log(this.router.url);
-
-    
-    //this.user.username = this.loginForm.get('email')?.value;
-    //this.user.pass = this.loginForm.get('pass')?.value;    
+  SignUp(){
+    //console.log(this.SignupForm.value);
+    //console.log(this.router.url);   
 
     let data = {
-      "username": this.loginForm.get('email')?.value,
-      "password": this.loginForm.get('pass')?.value
+      "nombres": this.SignupForm.get('names')?.value,
+      "apellidos": this.SignupForm.get('lastnames')?.value,
+      "email": this.SignupForm.get('email')?.value,
+      "contrasenia": this.SignupForm.get('pass')?.value,
     }
 
     let resp:any;
 
-    //console.log(JSON.stringify(this.user));
-    /*
-    this.userservices.postLogin(data).subscribe(
+    console.log(data);
+
+    
+    this.userservices.postUser(data).subscribe(
       res => {
         //console.log(res.ok);
         console.log('Response: '+ res);
-        console.log('respuesta: '+Object.values(res));
-        resp = Object.values(res);
-        console.log('token: '+ resp[0]);
-        this.saveLocalStorage(resp[0], resp[1], resp[2], resp[3], resp[4]);
         
         if (JSON.parse(JSON.stringify(res)) !='') {
           console.log('notification2');
-          Swal.fire({
+          /*Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Inicion de sesión Exitoso',
@@ -84,19 +77,21 @@ export class LoginComponent implements OnInit {
           }
           //this.location.replaceState('/'); // clears browser history so they can't navigate with back button
           //this.router.navigate(['movies']);
+          */
         }
       },
       err =>{
         console.log('response: '+err.status);
-        if(err.status === 401){
+        /*if(err.status === 401){
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Datos incorrectos'
           })
-        }
+        }*/
  
       }
-    );  */  
+    );  
   }
+
 }
