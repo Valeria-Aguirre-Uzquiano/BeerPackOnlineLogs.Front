@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LogFis } from 'src/app/Models/LogFis';
 import { LogsService } from 'src/app/services/logs.service';
+import { FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-records-logs',
@@ -11,19 +13,46 @@ import { LogsService } from 'src/app/services/logs.service';
 export class RecordsLogsComponent implements OnInit {
   
 
-  constructor(private modal: NgbModal, private logService: LogsService) { }
+  constructor(private modal: NgbModal, private logService: LogsService,private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
     //this.setData()
     this.getLogs();
  
   }
+  items = this.logService.getLogsFis();
+  checkoutForm = this.formBuilder.group({
+    fecha:'' ,
+    idArea:null ,
+    idServicio: null ,
+    condicionServicio: '',
+    nroEvento: '',
+    tipoEvento: '',
+    condicion: '',
+    resultado: '',
+    responsable: '',
+  });
+  onSubmit(): void {
+    
+    this.items = this.logService.getLogsFis();
+    console.warn('Your order has been submitted', this.checkoutForm.value);
+    this.logService.postLogFis(this.checkoutForm.value).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => []
+    );
+    location. reload()
+    this.checkoutForm.reset();
+  }
+ 
   total: any[]=[] 
   response: any = [];
   LogsFis: any | LogFis = [];
   
 
   setData() {
+    
 
     const postData = {
       "idArea": 1,
@@ -78,9 +107,7 @@ export class RecordsLogsComponent implements OnInit {
 
   submitted = false;
 
-  onSubmit() {
-    this.submitted = true;
-  }
+ 
 
 
   
